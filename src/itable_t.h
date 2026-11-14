@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * itable_t.h
  *
@@ -88,8 +89,8 @@ typedef struct {
 #define SET94		TRUE
 #define SET96		FALSE
 
-public boolean_t allow_unify;
-public ic_t unicode_width_threshold;
+extern boolean_t allow_unify;
+extern ic_t unicode_width_threshold;
 
 public void ItableInit();
 public byte ItableLookup( byte fin, boolean_t multi, boolean_t set94 );

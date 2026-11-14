@@ -35,6 +35,7 @@ endif
 
 
 
+if MAINTAINER_MODE
 #------------------------------------------------------------
 # the following rules are just for maintainer
 
@@ -260,3 +261,5 @@ ISO8859URL = ftp://ftp.unicode.org/Public/MAPPINGS/ISO8859
 	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
 	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
+
+endif

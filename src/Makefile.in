@@ -130,6 +130,8 @@ CFLAGS = @CFLAGS@ -DLV_HELP_PATH=\"$(lvlibdir)\" -I$(srcdir) \
 	-DUSE_UTF16 @DEFS@ $(am__append_1)
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CURSES_CFLAGS = @CURSES_CFLAGS@
+CURSES_LIBS = @CURSES_LIBS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
@@ -149,6 +151,7 @@ LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
 OBJEXT = @OBJEXT@
@@ -161,6 +164,9 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PERL = @PERL@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PURIFY = @PURIFY@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -231,21 +237,21 @@ lv_SOURCES = ascii.h attr.h begin.h big5.h boolean.h command.h conf.h \
 	hz.c raw.c fetch.c screen.c command.c display.c find.c re.c \
 	nfa.c dfa.c conv.c version.c conf.c lv.c console.c \
 	guesslocale.c utf.c unimap.c unirev.c $(am__append_2)
-CJKINFURL = ftp://ftp.ora.com/pub/examples/nutshell/cjkv/doc/
+@MAINTAINER_MODE_TRUE@CJKINFURL = ftp://ftp.ora.com/pub/examples/nutshell/cjkv/doc/
 
 #
 # Unicode mapping tables
 #
-BIG5URL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/OTHER
-GBURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/GB
-JISURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS
-KSCURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/KSC
-ISO8859URL = ftp://ftp.unicode.org/Public/MAPPINGS/ISO8859
+@MAINTAINER_MODE_TRUE@BIG5URL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/OTHER
+@MAINTAINER_MODE_TRUE@GBURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/GB
+@MAINTAINER_MODE_TRUE@JISURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS
+@MAINTAINER_MODE_TRUE@KSCURL = ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/KSC
+@MAINTAINER_MODE_TRUE@ISO8859URL = ftp://ftp.unicode.org/Public/MAPPINGS/ISO8859
 all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -270,9 +276,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 install-binPROGRAMS: $(bin_PROGRAMS)
@@ -590,203 +596,203 @@ uninstall-am: uninstall-binPROGRAMS
 # big5-cns map files
 #
 
-big5cns.map: cjk.inf.gz
-	$(PERL) $(srcdir)/big5cns.pl > $@
+@MAINTAINER_MODE_TRUE@big5cns.map: cjk.inf.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/big5cns.pl > $@
 
-cjk.inf.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(CJKINFURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@cjk.inf.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(CJKINFURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
 #
 # map files
 #
 
-map: big5.map gb2312.map jis.map ksc5601.map iso88592.map iso88593.map iso88594.map iso88595.map iso88596.map iso88597.map iso88598.map iso88599.map iso885910.map iso885911.map iso885913.map iso885914.map iso885915.map iso885916.map
+@MAINTAINER_MODE_TRUE@map: big5.map gb2312.map jis.map ksc5601.map iso88592.map iso88593.map iso88594.map iso88595.map iso88596.map iso88597.map iso88598.map iso88599.map iso885910.map iso885911.map iso885913.map iso885914.map iso885915.map iso885916.map
 
-big5.map: BIG5.TXT.gz
-	$(PERL) $(srcdir)/mapbig5.pl > $@
+@MAINTAINER_MODE_TRUE@big5.map: BIG5.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/mapbig5.pl > $@
 
-gb2312.map: GB2312.TXT.gz
-	$(PERL) $(srcdir)/mapgb.pl > $@
+@MAINTAINER_MODE_TRUE@gb2312.map: GB2312.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/mapgb.pl > $@
 
-jis.map: JIS0208.TXT.gz JIS0212.TXT.gz
-	$(PERL) $(srcdir)/mapjis.pl > $@
+@MAINTAINER_MODE_TRUE@jis.map: JIS0208.TXT.gz JIS0212.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/mapjis.pl > $@
 
-ksc5601.map: KSX1001.TXT.gz
-	$(PERL) $(srcdir)/mapksc.pl > $@
+@MAINTAINER_MODE_TRUE@ksc5601.map: KSX1001.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/mapksc.pl > $@
 
-iso88592.map: 8859-2.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 2 -i 'zcat 8859-2.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88592.map: 8859-2.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 2 -i 'zcat 8859-2.TXT.gz |' > $@
 
-iso88593.map: 8859-3.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 3 -i 'zcat 8859-3.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88593.map: 8859-3.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 3 -i 'zcat 8859-3.TXT.gz |' > $@
 
-iso88594.map: 8859-4.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 4 -i 'zcat 8859-4.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88594.map: 8859-4.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 4 -i 'zcat 8859-4.TXT.gz |' > $@
 
-iso88595.map: 8859-5.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 5 -i 'zcat 8859-5.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88595.map: 8859-5.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 5 -i 'zcat 8859-5.TXT.gz |' > $@
 
-iso88596.map: 8859-6.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 6 -i 'zcat 8859-6.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88596.map: 8859-6.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 6 -i 'zcat 8859-6.TXT.gz |' > $@
 
-iso88597.map: 8859-7.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 7 -i 'zcat 8859-7.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88597.map: 8859-7.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 7 -i 'zcat 8859-7.TXT.gz |' > $@
 
-iso88598.map: 8859-8.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 8 -i 'zcat 8859-8.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88598.map: 8859-8.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 8 -i 'zcat 8859-8.TXT.gz |' > $@
 
-iso88599.map: 8859-9.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 9 -i 'zcat 8859-9.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88599.map: 8859-9.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 9 -i 'zcat 8859-9.TXT.gz |' > $@
 
-iso885910.map: 8859-10.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 10 -i 'zcat 8859-10.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885910.map: 8859-10.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 10 -i 'zcat 8859-10.TXT.gz |' > $@
 
-iso885911.map: 8859-11.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 11 -i 'zcat 8859-11.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885911.map: 8859-11.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 11 -i 'zcat 8859-11.TXT.gz |' > $@
 
-iso885913.map: 8859-13.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 13 -i 'zcat 8859-13.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885913.map: 8859-13.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 13 -i 'zcat 8859-13.TXT.gz |' > $@
 
-iso885914.map: 8859-14.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 14 -i 'zcat 8859-14.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885914.map: 8859-14.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 14 -i 'zcat 8859-14.TXT.gz |' > $@
 
-iso885915.map: 8859-15.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 15 -i 'zcat 8859-15.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885915.map: 8859-15.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 15 -i 'zcat 8859-15.TXT.gz |' > $@
 
-iso885916.map: 8859-16.TXT.gz
-	$(PERL) $(srcdir)/map8859.pl -s 16 -i 'zcat 8859-16.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885916.map: 8859-16.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/map8859.pl -s 16 -i 'zcat 8859-16.TXT.gz |' > $@
 
 #
 # rev files
 #
 
-rev: big5.rev gb2312.rev jis0208.rev jis0212.rev ksc5601.rev iso88592.rev iso88593.rev iso88594.rev iso88595.rev iso88596.rev iso88597.rev iso88598.rev iso88599.rev iso885910.rev iso885911.rev iso885913.rev iso885914.rev iso885915.rev iso885916.rev
+@MAINTAINER_MODE_TRUE@rev: big5.rev gb2312.rev jis0208.rev jis0212.rev ksc5601.rev iso88592.rev iso88593.rev iso88594.rev iso88595.rev iso88596.rev iso88597.rev iso88598.rev iso88599.rev iso885910.rev iso885911.rev iso885913.rev iso885914.rev iso885915.rev iso885916.rev
 
-big5.rev: BIG5.TXT.gz
-	$(PERL) $(srcdir)/revbig5.pl > $@
+@MAINTAINER_MODE_TRUE@big5.rev: BIG5.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/revbig5.pl > $@
 
-gb2312.rev: GB2312.TXT.gz
-	$(PERL) $(srcdir)/revgb.pl > $@
+@MAINTAINER_MODE_TRUE@gb2312.rev: GB2312.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/revgb.pl > $@
 
-jis0208.rev: JIS0208.TXT.gz
-	$(PERL) $(srcdir)/rev0208.pl > $@
+@MAINTAINER_MODE_TRUE@jis0208.rev: JIS0208.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev0208.pl > $@
 
-jis0212.rev: JIS0212.TXT.gz
-	$(PERL) $(srcdir)/rev0212.pl > $@
+@MAINTAINER_MODE_TRUE@jis0212.rev: JIS0212.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev0212.pl > $@
 
-ksc5601.rev: KSX1001.TXT.gz
-	$(PERL) $(srcdir)/revksc.pl > $@
+@MAINTAINER_MODE_TRUE@ksc5601.rev: KSX1001.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/revksc.pl > $@
 
-iso88592.rev: 8859-2.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 2 -i 'zcat 8859-2.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88592.rev: 8859-2.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 2 -i 'zcat 8859-2.TXT.gz |' > $@
 
-iso88593.rev: 8859-3.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 3 -i 'zcat 8859-3.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88593.rev: 8859-3.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 3 -i 'zcat 8859-3.TXT.gz |' > $@
 
-iso88594.rev: 8859-4.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 4 -i 'zcat 8859-4.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88594.rev: 8859-4.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 4 -i 'zcat 8859-4.TXT.gz |' > $@
 
-iso88595.rev: 8859-5.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 5 -i 'zcat 8859-5.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88595.rev: 8859-5.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 5 -i 'zcat 8859-5.TXT.gz |' > $@
 
-iso88596.rev: 8859-6.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 6 -i 'zcat 8859-6.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88596.rev: 8859-6.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 6 -i 'zcat 8859-6.TXT.gz |' > $@
 
-iso88597.rev: 8859-7.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 7 -i 'zcat 8859-7.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88597.rev: 8859-7.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 7 -i 'zcat 8859-7.TXT.gz |' > $@
 
-iso88598.rev: 8859-8.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 8 -i 'zcat 8859-8.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88598.rev: 8859-8.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 8 -i 'zcat 8859-8.TXT.gz |' > $@
 
-iso88599.rev: 8859-9.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 9 -i 'zcat 8859-9.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso88599.rev: 8859-9.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 9 -i 'zcat 8859-9.TXT.gz |' > $@
 
-iso885910.rev: 8859-10.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 10 -i 'zcat 8859-10.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885910.rev: 8859-10.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 10 -i 'zcat 8859-10.TXT.gz |' > $@
 
-iso885911.rev: 8859-11.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 11 -i 'zcat 8859-11.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885911.rev: 8859-11.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 11 -i 'zcat 8859-11.TXT.gz |' > $@
 
-iso885913.rev: 8859-13.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 13 -i 'zcat 8859-13.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885913.rev: 8859-13.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 13 -i 'zcat 8859-13.TXT.gz |' > $@
 
-iso885914.rev: 8859-14.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 14 -i 'zcat 8859-14.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885914.rev: 8859-14.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 14 -i 'zcat 8859-14.TXT.gz |' > $@
 
-iso885915.rev: 8859-15.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 15 -i 'zcat 8859-15.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885915.rev: 8859-15.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 15 -i 'zcat 8859-15.TXT.gz |' > $@
 
-iso885916.rev: 8859-16.TXT.gz
-	$(PERL) $(srcdir)/rev8859.pl -s 16 -i 'zcat 8859-16.TXT.gz |' > $@
+@MAINTAINER_MODE_TRUE@iso885916.rev: 8859-16.TXT.gz
+@MAINTAINER_MODE_TRUE@	$(PERL) $(srcdir)/rev8859.pl -s 16 -i 'zcat 8859-16.TXT.gz |' > $@
 
-BIG5.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(BIG5URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@BIG5.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(BIG5URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
-GB2312.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(GBURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@GB2312.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(GBURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
-JIS0201.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-JIS0208.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-JIS0212.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@JIS0201.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@JIS0208.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@JIS0212.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(JISURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
-KSX1001.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(KSCURL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@KSX1001.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(KSCURL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
-8859-1.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-2.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-3.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-4.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-5.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-6.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-7.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-8.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-9.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-10.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-11.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-13.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-14.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-15.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
-8859-16.TXT.gz:
-	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
-	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-1.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-2.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-3.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-4.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-5.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-6.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-7.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-8.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-9.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-10.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-11.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-13.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-14.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-15.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
+@MAINTAINER_MODE_TRUE@8859-16.TXT.gz:
+@MAINTAINER_MODE_TRUE@	if [ ! -f ${@:.gz=} ]; then wget -O ${@:.gz=} $(ISO8859URL)/${@:.gz=} ; fi ; \
+@MAINTAINER_MODE_TRUE@	if [ -f ${@:.gz=} ]; then gzip ${@:.gz=} ; fi
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * version.h
  *
@@ -9,7 +10,7 @@
 #define __VERSION_H__
 
 #undef VERSION
-#define VERSION		"v.4.51.d (Feb. 22nd, 2018)"
+#define VERSION		"v.4.51.d+portable.1 (Nov.15th,2026)"
 
 public void Banner();
 

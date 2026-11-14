@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private ic_t revISO8859_13[ 96 ] = {
   0x00A0,
   0x201D,

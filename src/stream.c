@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * stream.c
  *
@@ -50,9 +51,20 @@
 #include <command.h>
 #include "stream.h"
 
-private byte *gz_filter = "zcat";
+/* Ideally the path of gz_filter should be provided via autoconf,
+ * but I don't want to create a mega patch for configure,
+ * which would be totally unreviewable.
+ */
+#if defined (__linux__) || defined (__GNU__) || defined (_WIN32) || defined (__MSYS__)
+private byte *gz_filter = "zcat"; /* GNU or Busybox userspace */
+#else
+/* zcat doesn't handle gzip'd data on BSDs such as macOS */
+private byte *gz_filter = "gzcat";
+#endif
 private byte *bz2_filter = "bzcat";
+private byte *lzma_filter = "lzcat";
 private byte *xz_filter = "xzcat";
+private byte *zstd_filter = "zstdcat";
 
 private stream_t *StreamAlloc()
 {
@@ -188,9 +200,12 @@ public stream_t *StreamOpen( byte *file )
 	filter = gz_filter;
       else if( !strcmp( "bz2", exts ) || !strcmp( "BZ2", exts ) )
 	filter = bz2_filter;
-      else if( !strcmp( "xz", exts ) || !strcmp( "XZ", exts )
-	  || !strcmp( "lzma", exts ) || !strcmp( "LZMA", exts ) )
+      else if( !strcmp( "xz", exts ) || !strcmp( "XZ", exts ) )
 	filter = xz_filter;
+      else if( !strcmp( "lzma", exts ) || !strcmp( "LZMA", exts ) )
+	filter = lzma_filter;
+      else if( !strcmp( "zst", exts ) || !strcmp( "ZST", exts ) )
+	filter = zstd_filter;
     }
   } else if( !strcmp( "NONE", filter_program ) ){
     filter = NULL;

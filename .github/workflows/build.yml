@@ -1,0 +1,26 @@
+name: build
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libncurses-dev
+      - run: CFLAGS='-O2 -g -std=gnu17' ./configure --prefix="$PWD/stage"
+      - run: make -j2 && make install
+      - run: python3 tests/smoke.py stage/bin/lv
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: make mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-pkgconf mingw-w64-ucrt-x86_64-python
+      - run: sh ./build-ucrt64.sh --prefix="$PWD/stage"
+      - run: make install
+      - run: python tests/smoke.py stage/bin/lv.exe

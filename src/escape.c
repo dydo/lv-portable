@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * escape.c
  *
@@ -61,6 +62,10 @@ public boolean_t DecodeEscape( state_t *state )
       if( !( ( ch >= '0' && ch <= '9' ) || ';' == ch ) )
 	break;
     } while( 'm' != ch );
+
+    if( 'K' == ch ){
+        return TRUE;
+    }
 
     SIDX = index;
 

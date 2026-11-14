@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * command.c
  *
@@ -61,6 +62,13 @@
 #include <stream.h>
 #include <begin.h>
 #include <command.h>
+
+boolean_t less_compatible;
+byte *editor_program;
+byte *filter_program;
+boolean_t initcmd_mode;
+char *initcmd_str;
+int initcmd_curp;
 
 #define LV_FILES_UNLIMITED	-1
 #ifndef MSDOS /* if NOT defined */
@@ -1200,8 +1208,15 @@ public void Command( file_t *file, byte **optional )
 	else
 	  label = "(END)";
       }
-      if( TRUE == f->top )
+      if( TRUE == f->top ){
 	label = FileName( f );
+        /* if the file name is not shorter than the width of the screen,
+         * it causes scrolling and moves the first line of the file
+         * out of the screen
+         */
+        if ( strlen(label) >= f->width )
+          label = NULL;
+      }
     }
 
     if( NULL != label ){

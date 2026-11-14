@@ -1,0 +1,26 @@
+Description: Fix gz_filter on BSDs
+Author: Akihiro Suda <akihiro.suda.cz@hco.ntt.co.jp>
+Last-Update: 2024-10-16
+
+diff --git a/src/stream.c b/src/stream.c
+index 1fd11ce..9ba8bf4 100644
+--- a/src/stream.c
++++ b/src/stream.c
+@@ -41,7 +41,16 @@
+ #include <begin.h>
+ #include "stream.h"
+ 
+-private byte *gz_filter = "zcat";
++/* Ideally the path of gz_filter should be provided via autoconf,
++ * but I don't want to create a mega patch for configure,
++ * which would be totally unreviewable.
++ */
++#if defined (__linux__) || defined (__GNU__) /* Linux or Hurd */
++private byte *gz_filter = "zcat"; /* GNU or Busybox userspace */
++#else
++/* zcat doesn't handle gzip'd data on BSDs such as macOS */
++private byte *gz_filter = "gzcat";
++#endif
+ private byte *bz2_filter = "bzcat";
+ private byte *lzma_filter = "lzcat";
+ private byte *xz_filter = "xzcat";

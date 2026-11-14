@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private codes_t big5Level1ToCnsPlane1[ 25 ] = {	/* range */
   { 0xA140, 0x2121 },
   { 0xA1F6, 0x2258 },

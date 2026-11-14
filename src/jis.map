@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private codes_cset_t mapJIS[ 12946 ] = {
   { 0x005C, 0x2140, X0208 },
   { 0x007E, 0x2237, X0212 },

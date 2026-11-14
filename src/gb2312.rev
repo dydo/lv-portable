@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private codes_t revGB2312[ 7445 ] = {
   { 0x2121, 0x3000 },
   { 0x2122, 0x3001 },

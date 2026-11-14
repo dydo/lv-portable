@@ -1,3 +1,117 @@
+lv (4.51-10.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Build with -std=gnu17 to workaround FTBFS with GCC 15.
+    (Closes: #1097323)
+
+ -- Adrian Bunk <bunk@debian.org>  Mon, 05 Jan 2026 14:15:15 +0200
+
+lv (4.51-10) unstable; urgency=medium
+
+  [ Akihiro Suda ]
+  * d/p/fix-escape-K.diff: Skip escape "K" codes for text decoration invoked
+    by "lv -c"
+  * d/p/gzcat.diff: Fix gz_filter path on BSDs
+
+  [ HIGUCHI Daisuke (VDR dai) ]
+  * eliminate lintian warning: build-depends-on-obsolete-package
+  * Bump Standards-Version to 4.7.0
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Tue, 17 Dec 2024 10:15:50 +0900
+
+lv (4.51-9) unstable; urgency=medium
+
+  * run wrap-and-sort -a.
+  * Bump debhelper compatibility level to 13
+  * Bump Standards-Version to 4.6.1
+  * eliminate lintian warning: update-debian-copyright
+  * add d/salsa-ci.yml
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Mon, 04 Jul 2022 11:49:05 +0900
+
+lv (4.51-8) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Drop no longer supported add-log-mailing-address setting from
+    debian/changelog.
+  * Use secure URI in debian/watch.
+  * Add missing colon in closes line.
+
+  [ HIGUCHI Daisuke (VDR dai) ]
+  * d/p/change-maximum-height-to-144.patch: new patch.
+    Thanks to TOMITA Masahiro <tommy@tmtm.org>.
+  * d/p/*.diff: new patches, thanks to B. Watson <yahlcru@gmail.com>.
+  * d/p/shows-the-filename-only.diff: new patch.
+    shows the file name only if it is shorter than the width of the screen.
+    (Closes: #406475). thanks to Oohara Yuuma <oohara@libra.interq.or.jp>.
+  * refresh patches.
+  * d/{docs,rules}: convert *.html to UTF-8 encoding.
+    Suggested by B Watson <yalhcru@gmail.com>, thanks.
+  * d/{control,compat}: eliminate lintian warning: uses-debhelper-compat-file.
+  * d/control: set Rules-Requires-Root as no.
+  * Bump Standards-Version to 4.5.0.
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Sun, 15 Nov 2020 19:37:47 +0900
+
+lv (4.51-7) unstable; urgency=medium
+
+  * eliminate lintian warning: unused-override
+  * Bump debhelper compatibility level to 12
+  * Update Standards-Version to 4.4.0
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Sat, 03 Aug 2019 12:39:51 +0900
+
+lv (4.51-6) unstable; urgency=medium
+
+  * support zstd automatic decompression (Closes: #930478)
+    thanks to YAMADA Tsuyoshi <tyamada@minimum2scp.org>.
+    - d/control: add zstd to Recommends for zstdcat.
+    - d/p/support-zstd-automatic-decompression.patch: new patch.
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Fri, 14 Jun 2019 18:54:50 +0900
+
+lv (4.51-5) unstable; urgency=medium
+
+  * eliminate lintian warning: file-contains-trailing-whitespace
+  * eliminate lintian warning: insecure-copyright-format-uri
+  * override lintian warning: spelling-error-in-patch-description
+  * remove autoreconf stuffs dut to dh level 11
+  * Use salsa.debian.org in Vcs-* fields
+  * Bump debhelper compatibility level to 11
+  * Bump Standards-Version to 4.1.3 (no changes needed)
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Tue, 27 Mar 2018 21:57:34 +0900
+
+lv (4.51-4) unstable; urgency=medium
+
+  * fix FTCBFS: configures for the build architecture (Closes: #866717)
+    thanks to Helmut Grohne <helmut@subdivi.de>.
+    - debian/rules: Let dh_auto_configure pass --host to ./configure
+    - For that to work, use a different builddirectory than .
+  * bump up Standards-Version 4.0.0
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Fri, 07 Jul 2017 23:13:08 +0900
+
+lv (4.51-3) unstable; urgency=medium
+
+  * New maintainer (Closes: #839674)
+    thanks to GOTO Masanori <gotom@debian.org> for previous works.
+  * debian/rules: enable hardening all
+  * debian/control: eliminate lintian warning: vcs-field-uses-insecure-uri
+  * debian/copyright: eliminate lintian warning:
+    dep5-copyright-license-name-not-unique
+  * disable Homepage and d/watch caused by web service termination
+    - debian/control
+    - debian/watch
+  * debian/postinst: adjust priority lower than less to not break systemctl
+    behavior, suggested by Hideki Yamane <henrich@debian.org> and
+    Osamu Aoki <osamu@debian.org>. see: #837218
+  * debian/README.Debian: describe "-c" option for allowing ANSI escape
+    sequences for text decoration. see: #837218
+  * bump up Standards-Version 3.9.8
+
+ -- HIGUCHI Daisuke (VDR dai) <dai@debian.org>  Tue, 04 Oct 2016 19:55:14 +0900
+
 lv (4.51-2.3) unstable; urgency=medium
 
   * Non-maintainer upload.
@@ -66,7 +180,7 @@ lv (4.50-1) unstable; urgency=low
   * New upstream release.  (Closes: #220716)
   * Lgrep segv problem is fixed when lgrep greps through many files
     (Closes: #188288)
-  * Wrong ISO-2022 final byte is fixed.  (Closes #207718)
+  * Wrong ISO-2022 final byte is fixed.  (Closes: #207718)
 
  -- GOTO Masanori <gotom@debian.or.jp>  Sun, 16 Nov 2003 01:21:59 +0900
 
@@ -84,12 +198,12 @@ lv (4.49.5-1) unstable; urgency=high
     with the line '-E/path/to/malicious/program', any user who uses the v
     (edit) command in that directory will unwittingly execute the malicious
     program; this could be exploited to run an arbitrary script with root
-    permissions.  This version fixes the problem.  Bug found by 
+    permissions.  This version fixes the problem.  Bug found by
     Leonard Stiles <ljs@uk2.net>.  (#190941).
-  * lv does not check environment variable EDITOR or VISUAL, it does not 
+  * lv does not check environment variable EDITOR or VISUAL, it does not
     follow debian policy 12.4.  This version fixes this problem.
     Patched by Michael Weber <michaelw@debian.org>.  (Closes: #181402)
-  * Fix 'unaligned access to' message from kernel due to unaligned 
+  * Fix 'unaligned access to' message from kernel due to unaligned
     access on 64 bit architecture machine.
 
  -- GOTO Masanori <gotom@debian.or.jp>  Mon, 12 May 2003 17:20:38 +0900
@@ -116,7 +230,7 @@ lv (4.49.4-6) unstable; urgency=low
 
 lv (4.49.4-5) unstable; urgency=low
 
-  * append debian/postinst, debian/prerm script (I forgot!). these scripts 
+  * append debian/postinst, debian/prerm script (I forgot!). these scripts
     register pager alternatives.
 
  -- GOTO Masanori <gotom@debian.or.jp>  Wed,  7 Nov 2001 16:41:09 +0900
@@ -129,7 +243,7 @@ lv (4.49.4-4) unstable; urgency=low
 
 lv (4.49.4-3) unstable; urgency=low
 
-  * applied the patch which forces displaying text whether @TERM is 
+  * applied the patch which forces displaying text whether @TERM is
     valid or not (X-ML-Name: debian-users @debian.or.jp, X-Mail-Count: 30379).
 
  -- GOTO Masanori <gotom@debian.or.jp>  Tue,  6 Nov 2001 01:09:03 +0900
@@ -224,7 +338,3 @@ lv (4.40-1) unstable; urgency=low
   * Initial Release.
 
  -- GOTO Masanori <gotom@cs.titech.ac.jp>  Thu,  6 May 1999 17:04:46 +0900
-
-Local variables:
-mode: debian-changelog
-End:

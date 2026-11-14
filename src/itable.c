@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * itable.c
  *
@@ -26,6 +27,9 @@
 #include <import.h>
 #include <begin.h>
 #include <itable_t.h>
+
+boolean_t allow_unify;
+ic_t unicode_width_threshold;
 
 /*
  * international character set table

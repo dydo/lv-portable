@@ -81,8 +81,51 @@ install-exec-hook:
 	fi
 	$(INSTALL) -m 444 $(srcdir)/lv.hlp $(DESTDIR)$(lvlibdir)
 
+if MINGW
+	$(INSTALL_DATA) $(srcdir)/lv.hlp $(DESTDIR)$(bindir)/lv.hlp
+endif
+
 uninstall-hook:
 	(cd $(DESTDIR)$(bindir) && \
 		/bin/rm -f lgrep$(EXEEXT))
 	(cd $(DESTDIR)$(lvlibdir) && \
 		/bin/rm -f lv.hlp)
+
+if MINGW
+	rm -f $(DESTDIR)$(bindir)/lv.hlp
+endif
+
+EXTRA_DIST += CHANGELOG.md \
+	LICENSES.md \
+	PROVENANCE.md \
+	VALIDATION.md \
+	input-manifest.json \
+	build-ucrt64.sh \
+	tests/smoke.py \
+	.github/workflows/build.yml \
+	vendor/debian/changelog \
+	vendor/debian/copyright \
+	vendor/debian/rules \
+	vendor/debian/patches/20050502_~+num-pat-option.diff \
+	vendor/debian/patches/20050506_%src%file.c_~enable-fastio-use-fread.2.diff \
+	vendor/debian/patches/20051030_%src%_~use_off_t.diff \
+	vendor/debian/patches/bts.660358.diff \
+	vendor/debian/patches/change-maximum-height-to-144.patch \
+	vendor/debian/patches/fix-escape-K.diff \
+	vendor/debian/patches/fix-hyphen-used-as-minus-sign.diff \
+	vendor/debian/patches/fix_implicit_decls.diff \
+	vendor/debian/patches/gzcat.diff \
+	vendor/debian/patches/makefile.diff \
+	vendor/debian/patches/man_typos.diff \
+	vendor/debian/patches/misc.diff \
+	vendor/debian/patches/no_inline.diff \
+	vendor/debian/patches/series \
+	vendor/debian/patches/shows-the-filename-only.diff \
+	vendor/debian/patches/sigvec.patch \
+	vendor/debian/patches/support-zstd-automatic-decompression.patch
+
+EXTRA_DIST += vendor/gentoo/lv-tinfo.patch
+
+EXTRA_DIST += check-unix-release.sh
+
+EXTRA_DIST += README_ja.md

@@ -3,14 +3,15 @@
 
 AC_PREREQ([2.68])
 
-AC_INIT(lv, 4.51)
+AC_INIT([lv-portable], [4.51.portable.1])
 AC_CONFIG_SRCDIR([src/lv.c])
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 
 #AX_ENABLE_BUILDDIR
-AM_INIT_AUTOMAKE([foreign])
+AM_INIT_AUTOMAKE([foreign tar-ustar])
+AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_LN_S
@@ -46,7 +47,15 @@ esac
 AM_CONDITIONAL([MINGW], [test x$host_mingw = xyes])
 
 # Checks for libraries.
+AS_IF([test "x$host_mingw" != xyes], [
+PKG_CHECK_MODULES([CURSES], [ncurses], [
+  CPPFLAGS="$CURSES_CFLAGS $CPPFLAGS"
+  LIBS="$CURSES_LIBS $LIBS"
+], [
 AC_CHECK_LIB(terminfo, tgetstr,, [AC_CHECK_LIB(termcap, tgetstr,, [AC_CHECK_LIB(ncurses, tgetstr,, [AC_CHECK_LIB(curses, tgetstr)])])])
+])
+
+])
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -97,3 +106,4 @@ AC_ARG_ENABLE(fastio,
 AC_CONFIG_FILES([Makefile
 		 src/Makefile])
 AC_OUTPUT
+

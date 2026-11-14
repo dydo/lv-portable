@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 /*
  * file.c
  *
@@ -72,7 +73,7 @@ public void FileFreeLine( file_t *f )
 }
 
 #ifdef USE_INTERNAL_IOBUF
-public INLINE int IobufGetc( iobuf_t *iobuf )
+public int IobufGetc( iobuf_t *iobuf )
 {
   if( iobuf->ungetc != EOF ){
     int ch = iobuf->ungetc;
@@ -90,7 +91,7 @@ public INLINE int IobufGetc( iobuf_t *iobuf )
   return iobuf->buf[ iobuf->cur++ ];
 }
 
-public INLINE int IobufUngetc( int ch, iobuf_t *iobuf )
+public int IobufUngetc( int ch, iobuf_t *iobuf )
 {
   if( iobuf->cur == 0 ){
     /* XXX: it should be tied to fp sanely */

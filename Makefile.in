@@ -171,6 +171,8 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CURSES_CFLAGS = @CURSES_CFLAGS@
+CURSES_LIBS = @CURSES_LIBS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
@@ -190,6 +192,7 @@ LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKDIR_P = @MKDIR_P@
 OBJEXT = @OBJEXT@
@@ -202,6 +205,9 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PERL = @PERL@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PURIFY = @PURIFY@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
@@ -260,7 +266,7 @@ top_srcdir = @top_srcdir@
 lvlibdir = $(libdir)/lv
 SUBDIRS = src
 man1_MANS = lv.1
-EXTRA_DIST = .editorconfig .gitignore GPL.txt hello.sample \
+EXTRA_DIST = README_ja.md .editorconfig .gitignore GPL.txt hello.sample \
 	hello.sample.gif index.html lv.1 lv.hlp README.md relnote.html \
 	build/README.txt src/Makefile.dos src/Makefile.mingw \
 	src/Makefile.msvc src/big5.map src/big5.rev src/big5cns.map \
@@ -278,13 +284,35 @@ EXTRA_DIST = .editorconfig .gitignore GPL.txt hello.sample \
 	src/jis0212.rev src/ksc5601.map src/ksc5601.rev src/map8859.pl \
 	src/mapbig5.pl src/mapgb.pl src/mapjis.pl src/mapksc.pl \
 	src/rev0208.pl src/rev0212.pl src/rev8859.pl src/revbig5.pl \
-	src/revgb.pl src/revksc.pl
+	src/revgb.pl src/revksc.pl CHANGELOG.md LICENSES.md \
+	PROVENANCE.md VALIDATION.md input-manifest.json \
+	build-ucrt64.sh tests/smoke.py .github/workflows/build.yml \
+	vendor/debian/changelog vendor/debian/copyright \
+	vendor/debian/rules \
+	vendor/debian/patches/20050502_~+num-pat-option.diff \
+	vendor/debian/patches/20050506_%src%file.c_~enable-fastio-use-fread.2.diff \
+	vendor/debian/patches/20051030_%src%_~use_off_t.diff \
+	vendor/debian/patches/bts.660358.diff \
+	vendor/debian/patches/change-maximum-height-to-144.patch \
+	vendor/debian/patches/fix-escape-K.diff \
+	vendor/debian/patches/fix-hyphen-used-as-minus-sign.diff \
+	vendor/debian/patches/fix_implicit_decls.diff \
+	vendor/debian/patches/gzcat.diff \
+	vendor/debian/patches/makefile.diff \
+	vendor/debian/patches/man_typos.diff \
+	vendor/debian/patches/misc.diff \
+	vendor/debian/patches/no_inline.diff \
+	vendor/debian/patches/series \
+	vendor/debian/patches/shows-the-filename-only.diff \
+	vendor/debian/patches/sigvec.patch \
+	vendor/debian/patches/support-zstd-automatic-decompression.patch \
+	vendor/gentoo/lv-tinfo.patch check-unix-release.sh
 all: all-recursive
 
 .SUFFIXES:
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -311,9 +339,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	$(am__cd) $(srcdir) && $(AUTOCONF)
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
 install-man1: $(man1_MANS)
@@ -840,11 +868,15 @@ install-exec-hook:
 	fi
 	$(INSTALL) -m 444 $(srcdir)/lv.hlp $(DESTDIR)$(lvlibdir)
 
+@MINGW_TRUE@	$(INSTALL_DATA) $(srcdir)/lv.hlp $(DESTDIR)$(bindir)/lv.hlp
+
 uninstall-hook:
 	(cd $(DESTDIR)$(bindir) && \
 		/bin/rm -f lgrep$(EXEEXT))
 	(cd $(DESTDIR)$(lvlibdir) && \
 		/bin/rm -f lv.hlp)
+
+@MINGW_TRUE@	rm -f $(DESTDIR)$(bindir)/lv.hlp
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

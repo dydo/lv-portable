@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private codes_t revJIS0212[ 6067 ] = {
   { 0x222F, 0x02D8 },
   { 0x2230, 0x02C7 },

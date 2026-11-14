@@ -1,0 +1,20 @@
+Description: Skip escape "K" codes for text decoration invoked by "lv -c"
+Origin: https://github.com/Homebrew/homebrew-core/pull/53085/commits/4c7bced8a969dae59248293a68135fb9a5011211
+Author: https://github.com/kkdd
+Last-Update: 2024-10-16
+
+diff --git a/src/escape.c b/src/escape.c
+index ad4f1ba..99c31d2 100644
+--- a/src/escape.c
++++ b/src/escape.c
+@@ -62,6 +62,10 @@ public boolean_t DecodeEscape( state_t *state )
+ 	break;
+     } while( 'm' != ch );
+ 
++    if( 'K' == ch ){
++        return TRUE;
++    }
++
+     SIDX = index;
+ 
+     if( 'm' != ch ){

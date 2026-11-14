@@ -1,3 +1,4 @@
+/* Modified/restored 2026-11-15 for lv-portable; see CHANGELOG.md. */
 private codes_t mapISO8859_14[ 96 ] = {
   { 0x00A0, 0x20 },
   { 0x00A3, 0x23 },
