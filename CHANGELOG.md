@@ -2,6 +2,9 @@
 
 ## Unreleased — 2026-11-15
 
+- Add English/Japanese warranty and liability summaries referencing GPL
+  sections 11 and 12, and clarify native Windows search-pattern encoding.
+
 - Published the integration in dydo/lv-portable and verified successful hosted
   Linux and Windows builds/smoke tests for a49e2cd.
 

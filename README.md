@@ -148,6 +148,17 @@ lgrep -Iu8 -Ku8 -Ou8 'pattern' file.txt
 `-I` selects input encoding, `-O` selects output encoding, and `-K` selects
 keyboard/pattern encoding. See `lv -h`, `lv.1` and `index.html` for details.
 
+On native Windows, the command-line pattern encoding can differ from the
+terminal encoding. In the tested Japanese Windows environment, Japanese
+arguments reached the program as CP932, so this form was required:
+
+```sh
+lgrep -Iu8 -Ks -Ou8 '検索語' file.txt
+```
+
+Choose `-K` to match the encoding actually passed to the program; `-Ku8`
+is not correct for every Windows environment.
+
 ## Validation
 
 | Check | MSYS2 UCRT64 / GCC 16.2.0 | Gentoo Linux / GCC 16.2.1 |
@@ -179,6 +190,18 @@ autoreconf -fi
 
 `--enable-maintainer-mode` enables legacy table-regeneration rules requiring
 external mapping data. It is not needed for ordinary builds or use.
+
+## No warranty and limitation of liability
+
+This software is provided as-is. To the extent permitted by applicable law,
+no warranty is provided, including warranties of merchantability or fitness
+for a particular purpose. Unless applicable law requires otherwise or there
+is a written agreement, copyright holders, modifiers and redistributors are
+not liable for damages arising from using or being unable to use it, as
+described in sections 11 and 12 of [GPL.txt](GPL.txt).
+
+This is a summary of those provisions, not a change to the license or an
+additional restriction on use.
 
 ## License and sources
 
