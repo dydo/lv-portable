@@ -164,8 +164,8 @@ Windows builds without `-fcommon`. Gentoo links `libncurses.so.6` and
 
 Interactive key handling, all compression formats, large-file limits and
 other OS/compiler combinations remain untested. No security audit has been
-performed. Linux/Windows GitHub Actions jobs are included but have not been
-run on hosted runners. See [VALIDATION.md](VALIDATION.md) and the accompanying
+performed. Hosted GitHub Actions Linux and Windows jobs passed for `a49e2cd`; see the
+[build results](https://github.com/dydo/lv-portable/actions/runs/43617125778). See [VALIDATION.md](VALIDATION.md) and the accompanying
 `validation-results.json`.
 
 ## Regenerating configure

@@ -9,7 +9,8 @@ No installed system lv was overwritten.
 
 Not yet validated: interactive paging/key handling, all compression formats,
 large-file limits, other Unix systems, or other Windows toolchains.
-The included CI workflow has not been run on a hosted runner.
+Hosted GitHub Actions Linux and Windows builds and smoke tests passed for
+commit a49e2cd: https://github.com/dydo/lv-portable/actions/runs/43617125778
 
 Final asset hashes and patch reproduction results are in the accompanying
 validation-results.json and SHA256SUMS. Documentation was updated after the

@@ -143,7 +143,7 @@ lgrep -Iu8 -Ku8 -Ou8 '検索語' file.txt
 
 Windows では `-fcommon` なしでビルドしています。Gentoo では `libncurses.so.6` と `libtinfo.so.6` へのリンクを確認しました。Windows の出力は CRLF 改行になるため、変換テストでは改行を正規化して比較しています。
 
-対話画面のキー操作全般、各圧縮形式、大容量ファイル、その他の OS／コンパイラは未検証です。セキュリティ監査は実施していません。GitHub Actions の Linux／Windows 用設定を同梱していますが、ホストされた CI での成功実績はまだありません。
+対話画面のキー操作全般、各圧縮形式、大容量ファイル、その他の OS／コンパイラは未検証です。セキュリティ監査は実施していません。GitHub Actions 上でも Linux／Windows のビルドとテストが成功しています（`a49e2cd`）。[実行結果](https://github.com/dydo/lv-portable/actions/runs/43617125778)を参照してください。
 
 詳細は [VALIDATION.md](VALIDATION.md) と、配布物に付属する `validation-results.json` を参照してください。
 

@@ -2,6 +2,9 @@
 
 ## Unreleased — 2026-11-15
 
+- Published the integration in dydo/lv-portable and verified successful hosted
+  Linux and Windows builds/smoke tests for a49e2cd.
+
 - Include the terminal library's termcap.h instead of declaring its functions
   with empty parameter lists, which mean no parameters in C23.
 - Match the termcap string buffer pointer to the library's char ** parameter.
