@@ -25,6 +25,11 @@
 #include <string.h>
 #include <signal.h>
 
+#ifdef TERMCAP
+/* Modified 2026-11-15: use library prototypes, including for C23 builds. */
+#include <termcap.h>
+#endif
+
 #ifdef MSDOS
 #include <dos.h>
 #endif /* MSDOS */
@@ -150,9 +155,6 @@ private int (*putfunc)(int) = putchar;
 #ifdef TERMCAP
 private char entry[ 1024 ];
 private char func[ 1024 ];
-
-extern char *tgetstr(), *tgoto();
-extern int tgetent(), tgetflag(), tgetnum(), tputs();
 
 private char *cursor_address		= NULL;
 private char *clear_screen		= NULL;
@@ -504,7 +506,7 @@ public void ConsoleTermInit()
 #endif /* _WIN32 */
 
 #ifdef TERMCAP
-  byte *term, *ptr;
+  char *term, *ptr;
 #endif
 #ifdef TERMINFO
   byte *term;

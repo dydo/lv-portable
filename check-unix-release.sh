@@ -18,7 +18,7 @@ tar -C "$source_dir" --exclude='./.git' --exclude='./stage' \
 tar -C "$check_dir/source" -xf "$check_dir/source.tar"
 cd "$check_dir/source"
 cc --version > "$check_dir/compiler.txt"
-CFLAGS='-O2 -g -std=gnu17' ./configure --prefix="$check_dir/install" \
+CFLAGS="${CFLAGS:--O2 -g -std=gnu17}" ./configure --prefix="$check_dir/install" \
     > "$check_dir/configure.log" 2>&1
 make -j2 > "$check_dir/build.log" 2>&1
 make install > "$check_dir/install.log" 2>&1

@@ -1,5 +1,15 @@
 # Integration changes
 
+## Unreleased — 2026-11-15
+
+- Include the terminal library's termcap.h instead of declaring its functions
+  with empty parameter lists, which mean no parameters in C23.
+- Match the termcap string buffer pointer to the library's char ** parameter.
+- Allow CFLAGS to be supplied to check-unix-release.sh so newer C language
+  modes can be verified without changing the helper script.
+- Verified clean builds, isolated installs and Japanese conversion/help smoke
+  tests with Gentoo GCC 16.2.1 defaults and with explicit GNU17.
+
 ## 4.51.portable.1 — 2026-11-15 (release candidate)
 
 - Start with the supplied lv-mod Windows/UTF-16 code and merge Debian's
